@@ -47,16 +47,39 @@ header {
   align-items: center;
   gap: 12px;
 }
+
+.nav-left img {
+   height: 52px;
+    width: 52px;
+    object-fit: contain;
+}
+
 /* Enlarge logo on hover - only on screens wider than 768px */
 @media (min-width: 768px) {
+
   .nav-left img {
-    transition: transform 0.3s ease; /* smooth animation */
+
+    transition: transform 0.3s ease, 
+                border 0.3s ease, 
+                box-shadow 0.3s ease,
+                backdrop-filter 0.3s ease;
+    border-radius: 50%; /* fully round – makes it a circle if the image is square */
   }
 
   .nav-left img:hover {
-    transform: scale(1.2); /* enlarge by 20% */
+    transform: scale(3); /* enlarge by 200% */
+    border: 3px solid rgba(255, 255, 255, 0.4); /* subtle border */
+    outline: none;
+
+    /* Glassmorphism effect */
+    background: rgba(255, 255, 255, 0.15); /* translucent background */
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   }
 }
+
+
 .brand {
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
@@ -345,7 +368,104 @@ label {
 .mt-5 { margin-top: 36px; }
 .center { text-align: center; }
 
+/* Media queries for mobile */
+@media screen and (max-width: 768px) {
+  .nav-left img {
+    height: 48px;
+    width: 48px;
+  }
+  .brand {
+    font-size: 1.1rem;
+  }
+  nav ul {
+    position: absolute;
+    right: 18px;
+    top: 74px;
+    background: #312f2f;
+    padding: 16px;
+    border-radius: 12px;
+    flex-direction: column;
+    max-height: 0;              /* collapsed */
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+}
+
+
+/* ========== HOMEPAGE (hero, feature grids, badges) ========== */
+/* ≤1200px: tighten hero text and card images a bit */
+@media (max-width: 1200px) {
+  #home .hero, .page-home .hero {
+    min-height: 56vh;
+  }
+  #home .hero h1, .page-home .hero h1 {
+    font-size: 40px;
+  }
+  #home .card img, .page-home .card img {
+    height: 190px;
+  }
+}
+
+/* ≤992px: stack hero content more comfortably and space sections */
+@media (max-width: 992px) {
+  #home .section, .page-home .section {
+    padding: 56px 0;
+  }
+  #home .hero h1, .page-home .hero h1 {
+    font-size: 36px;
+    line-height: 1.2;
+  }
+  #home .badge, .page-home .badge,
+  #home .time,  .page-home .time {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+}
+
+/* ≤768px: single-column cards (your global .grid-3 already does this), 
+   but tighten hero spacing & buttons */
+@media (max-width: 768px) {
+  #home .hero, .page-home .hero {
+    min-height: 48vh;
+    padding: 24px 0;
+  }
+  #home .hero p, .page-home .hero p {
+    font-size: 0.95rem;
+  }
+  #home .btn + .btn, .page-home .btn + .btn {
+    margin-top: 10px;
+  }
+}
+
+/* ≤576px & ≤425px: smaller headline and card images */
+@media (max-width: 576px) {
+  #home .hero h1, .page-home .hero h1 {
+    font-size: 30px;
+  }
+  #home .card img, .page-home .card img {
+    height: 170px;
+  }
+}
+@media (max-width: 425px) {
+  #home .hero h1, .page-home .hero h1 {
+    font-size: 28px; /* complements your global 32px rule if both apply */
+  }
+}
+
+/* ≥1280px: give hero more breathing room on wide screens */
+@media (min-width: 1280px) {
+  #home .hero, .page-home .hero {
+    min-height: 68vh;
+  }
+}
+
+ 
+
+
+/*-----------------------------------------------*/
 /* ---------- NEW: Recipes Showcase ---------- */
+/*-----------------------------------------------*/
 .recipes-showcase {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -497,8 +617,63 @@ label {
 }
 .recipe-card .fav:hover { transform: scale(1.05); }
 
-/* ---------- NEW: Workout Guide ---------- */
 
+/* ========== RECIPES (filters, card grid, images) ========== */
+
+/* ≤1200px: moderate image height and gutter */
+@media (max-width: 1200px) {
+  #recipes .card img, .page-recipes .card img {
+    height: 190px;
+  }
+  #recipes .filters, .page-recipes .filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+}
+
+/* ≤992px: 2-column card grid if you use a recipes-specific grid */
+@media (max-width: 992px) {
+  #recipes .recipe-grid, .page-recipes .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+/* ≤768px: single column; keep filters scrollable horizontally if crowded */
+@media (max-width: 768px) {
+  #recipes .recipe-grid, .page-recipes .recipe-grid {
+    grid-template-columns: 1fr;
+  }
+  #recipes .filters, .page-recipes .filters {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+  }
+  #recipes .card img, .page-recipes .card img {
+    height: 170px;
+  }
+}
+
+/* ≤576px: smaller titles/badges on recipe cards */
+@media (max-width: 576px) {
+  #recipes .section-title, .page-recipes .section-title {
+    font-size: 26px;
+  }
+  #recipes .badge, .page-recipes .badge {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+}
+
+
+
+
+
+/*-----------------------------------------------*/
+/* ---------- NEW: Workout Guide ---------- */
+/*-----------------------------------------------*/
 :root{
   --bg:#0f1020; --ink:#f4f7fb; --muted:#a8b0c6; --card:#15162a;
   --chip:#232544; --ghost:#1b1c34;
@@ -573,6 +748,56 @@ a{color:var(--ink);text-decoration:none}
 .gb-toast{position:fixed;left:50%;top:16px;transform:translateX(-50%);background:#0b0d12;color:#fff;padding:8px 12px;border-radius:8px;opacity:0;transition:.25s;z-index:9999}
   .gb-toast.show{opacity:1}
   
+/* ========== WORKOUT (pairs, grids, detail modals) ========== */
+
+/* Base assumptions (non-breaking): 
+   - Use .workout-grid for list of workouts
+   - Use .workout-pair for side-by-side (text + image, or two cards) */
+@media (max-width: 1200px) {
+  #workout .card img, .page-workout .card img {
+    height: 190px;
+  }
+}
+
+/* ≤992px: relax spacing and keep pairs readable */
+@media (max-width: 992px) {
+  #workout .section, .page-workout .section {
+    padding: 56px 0;
+  }
+  #workout .workout-pair, .page-workout .workout-pair {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+}
+
+/* ≤768px: stack pairs vertical; make any 2-col grids single column */
+@media (max-width: 768px) {
+  #workout .workout-pair, .page-workout .workout-pair {
+    grid-template-columns: 1fr;   /* <-- the “.workout-pair” you asked about */
+  }
+  #workout .grid-2, .page-workout .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  #workout .card img, .page-workout .card img {
+    height: 170px;
+  }
+}
+
+/* ≤576px: tighten typography for exercise details */
+@media (max-width: 576px) {
+  #workout .section-title, .page-workout .section-title {
+    font-size: 26px;
+  }
+  #workout .table, .page-workout .table {
+    font-size: 0.95rem;
+  }
+}
+
+
 
 /*----------------------------------------------mindfullness;-----------------------------------*/
 /* ---------- NEW: Mindfulness Section ---------- */
@@ -591,3 +816,38 @@ a{color:var(--ink);text-decoration:none}
   } */
 
 
+
+/* ========== GLOBAL UTILITY TWEAKS BY BREAKPOINTS ========== */
+/* ≤992px: shrink container a bit earlier for nicer line lengths */
+@media (max-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+/* ≤768px: you already convert .grid-3, .form-row, footer-wrap. 
+   Add a safe default for any .grid-2 not covered in sections. */
+@media (max-width: 768px) {
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+/* ≤576px: scale headings and base text slightly for dense pages */
+@media (max-width: 576px) {
+  h1 { font-size: clamp(1.6rem, 5vw, 2rem); }
+  h2 { font-size: clamp(1.3rem, 4.2vw, 1.6rem); }
+  .section { padding: 52px 0; }
+}
+
+/* ≥1280px: slightly wider container and taller card images for visual punch */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1240px;
+  }
+  .card img {
+    height: 220px;
+  }
+}

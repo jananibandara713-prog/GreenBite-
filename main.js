@@ -28,7 +28,9 @@ const quotes = [
   'Fuel your day with good choices.',
   'Health is a relationship between you and your body.'
 ];
+
 const quoteEl = document.getElementById('rotatingQuote');
+
 if (quoteEl) {
   let i = 0;
   setInterval(() => {
