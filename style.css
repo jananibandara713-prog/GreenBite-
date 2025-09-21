@@ -543,7 +543,6 @@ a{color:var(--ink);text-decoration:none}
 .thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .thumb .grad{position:absolute;inset:0}
 
-
 .card-body{padding:12px}
 .card-title{font-weight:800;font-family:Poppins,system-ui}
 .subtitle{color:#cbd2ff;margin-top:2px}
@@ -567,15 +566,14 @@ a{color:var(--ink);text-decoration:none}
 
 /* Toast */
 .gb-toast{position:fixed;left:50%;top:16px;transform:translateX(-50%);background:#0b0d12;color:#fff;padding:8px 12px;border-radius:8px;opacity:0;transition:.25s;z-index:9999}
-.gb-toast.show{opacity:1}
-
-
+  .gb-toast.show{opacity:1}
+  
 
 /*----------------------------------------------mindfullness;-----------------------------------*/
 /* ---------- NEW: Mindfulness Section ---------- */
-.section {
+/* .section {
   background: url('mind.jpg') center/cover no-repeat;
-}
+} */
 
 /* Breathing circle */
 #breathCircle {
@@ -583,3 +581,10 @@ a{color:var(--ink);text-decoration:none}
   color: #222;              /* dark text for readability */
   border: 3px solid #7AC143;/* optional outline in your primary green */
 }
+
+/* Mobile  Small screens
+@media (max-width: 640px) {
+  .grid-3 {
+    grid-template-columns: 1fr; /* Stack cards vertically
+  } */
+
