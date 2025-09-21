@@ -1,0 +1,99 @@
+{
+  "full": {
+    "none": [
+          "Jumping Jacks",
+          "Bodyweight Squats",
+          "Push-ups",
+          "Mountain Climbers",
+          "Burpees"
+    ],
+    "dumbbells": [
+      "DB Squats",
+      "DB Press",
+      "DB Rows",
+      "DB Lunges",
+      "DB Deadlifts"
+    ],
+    "bands": [
+      "Band Squats",
+      "Band Press",
+      "Band Rows",
+      "Band Walks",
+      "Band Deadlifts"
+    ]
+  },
+  "arms": {
+    "none": [
+      "Diamond Push-ups",
+      "Tricep Dips",
+      "Inchworms",
+      "Plank Shoulder Taps"
+    ],
+    "dumbbells": [
+      "DB Bicep Curls",
+      "DB Tricep Kickbacks",
+      "Hammer Curls",
+      "Overhead Tricep Press"
+    ],
+    "bands": [
+      "Band Curls",
+      "Band Tricep Extensions",
+      "Band Pull Aparts"
+    ]
+  },
+  "legs": {
+    "none": [
+      "Squats",
+      "Lunges",
+      "Glute Bridge",
+      "Wall Sit",
+      "Calf Raises"
+    ],
+    "dumbbells": [
+      "DB Lunges",
+      "Goblet Squats",
+      "Romanian Deadlift",
+      "Step-ups"
+    ],
+    "bands": [
+      "Band Squats",
+      "Band Leg Extensions",
+      "Band Side Steps"
+    ]
+  },
+  "abs": {
+    "none": [
+      "Plank",
+      "Bicycle Crunches",
+      "Leg Raises",
+      "Russian Twists",
+      "Dead Bug"
+    ],
+    "dumbbells": [
+      "Weighted Russian Twists",
+      "DB Dead Bug",
+      "DB Toe Touch"
+    ],
+    "bands": [
+      "Band Pallof Press",
+      "Band Crunches"
+    ]
+  },
+  "back": {
+    "none": [
+      "Superman",
+      "Reverse Snow Angels",
+      "Y-T-W Raises",
+      "Hip Hinge"
+    ],
+    "dumbbells": [
+      "DB Rows",
+      "Renegade Row",
+      "DB Reverse Fly"
+    ],
+    "bands": [
+      "Band Rows",
+      "Band Face Pulls"
+    ]
+  }
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home • GreenBite</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./logo.png" type="image/png">
+  <meta name="theme-color" content="#7AC143">
+</head>
+<body data-page="index">
+
+<header>
+  <div class="container navbar">
+    <div class="nav-left">
+      <img src="./logo.png" alt="GreenBite logo">
+      <span class="brand">GreenBite</span>
+    </div>
+
+    <!-- Primary site navigation -->
+    <nav aria-label="Primary">
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+      <ul id="navLinks" class="nav-links">
+        <li><a href="./index.html" data-page="index" aria-current="page" class="active">Home</a></li>
+        <li><a href="./recipes.html" data-page="recipes">Recipes</a></li>
+        <li><a href="./calculator.html" data-page="calculator">Calculator</a></li>
+        <li><a href="./workout.html" data-page="workout">Workout</a></li>
+        <li><a href="./mindfulness.html" data-page="mindfulness">Mindfulness</a></li>
+        <li><a href="./contact.html" data-page="contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1 id="rotatingQuote">Eat real food, not too much, mostly plants.</h1>
+    <p id="dailyTip">Daily tip loads here...</p>
+    <a class="btn" href="./recipes.html">Explore Recipes</a>
+    <a class="btn btn-outline" href="./calculator.html">Calorie Calculator</a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Popular Sections</h2>
+    <div class="grid grid-3">
+      <div class="card">
+        <img src="./food1.jpg" alt="">
+        <div class="card-body">
+          <span class="badge">Nutrition</span>
+          <span class="time">5 min read</span>
+          <h3 class="mt-2">Balanced Meals</h3>
+          <p>Create simple meal plans and discover healthy recipes.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="./workout.jpg" alt="">
+        <div class="card-body">
+          <span class="badge">Fitness</span>
+          <span class="time">Quick sets</span>
+          <h3 class="mt-2">Smart Workouts</h3>
+          <p>Personalised workouts based on your age & goals.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="./mind.jpg" alt="">
+        <div class="card-body">
+          <span class="badge">Mindfulness</span>
+          <span class="time">3 min</span>
+          <h3 class="mt-2">Calm Mind</h3>
+          <p>Guided breathing, quotes and meditation timers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-wrap">
+    <div class="footer-col">
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="./logo.png" alt="logo" style="height:44px">
+        <h4>GreenBite</h4>
+      </div>
+      <p class="mt-2">Healthy recipes, smart workouts and calm mind tools.</p>
+      <div class="socials">
+        <a href="https://facebook.com" aria-label="Facebook">f</a>
+        <a href="https://instagram.com" aria-label="Instagram">⌁</a>
+        <a href="https://youtube.com" aria-label="YouTube">▶</a>
+        <a href="mailto:support@greenbite.example" aria-label="Email">@</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <p><a href="./recipes.html">Recipes</a></p>
+      <p><a href="./workout.html">Workout</a></p>
+      <p><a href="./mindfulness.html">Mindfulness</a></p>
+      <p><a href="./calculator.html">Calculator</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Newsletter</h4>
+      <p>Get one healthy tip every week.</p>
+      <div class="form-row mt-2">
+        <input class="input" id="newsEmail" placeholder="Enter your email">
+        <button class="btn" id="newsBtn">Subscribe</button>
+      </div>
+      <small id="newsMsg"></small>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2025 GreenBite Wellness • Educational project</div>
+</footer>
+
+<script src="./main.js"></script>
+<script>
+  // Mobile menu toggle (works with your existing CSS/JS)
+  (function () {
+    const btn = document.getElementById('hamburger');
+    const list = document.getElementById('navLinks');
+    if (!btn || !list) return;
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      list.classList.toggle('open');
+    });
+
+    // Auto-apply "active" + aria-current on the correct page when this header is reused
+    const currentPage = document.body.getAttribute('data-page'); // e.g., "index", "recipes" ...
+    if (currentPage) {
+      document.querySelectorAll('#navLinks a').forEach(a => {
+        const page = a.getAttribute('data-page');
+        if (page === currentPage) {
+          a.classList.add('active');
+          a.setAttribute('aria-current', 'page');
+        } else {
+          a.classList.remove('active');
+          a.removeAttribute('aria-current');
+        }
+      });
+    }
+  }());
+</script>
+</body>
+</html>

@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipes • GreenBite</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./logo.png" type="image/png">
+  <meta name="theme-color" content="#7AC143">
+</head>
+<body data-page="recipes">
+<header>
+  <div class="container navbar">
+    <div class="nav-left">
+      <img src="./logo.png" alt="GreenBite logo">
+      <span class="brand">GreenBite</span>
+    </div>
+    <nav>
+      <div class="hamburger" id="hamburger">☰</div>
+      <ul id="navLinks">
+        <li><a class="" href="./index.html">Home</a></li>
+      <li><a class="" href="./recipes.html">Recipes</a></li>
+      <li><a class="active" href="./calculator.html">Calculator</a></li>
+      <li><a class="" href="./workout.html">Workout</a></li>
+      <li><a class="" href="./mindfulness.html">Mindfulness</a></li>
+      <li><a class="" href="./contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<section class="section container">
+  <h2 class="section-title">Healthy Recipes</h2>
+  <div class="form-row">
+    <input id="recipeSearch" class="input" placeholder="Search by name...">
+    <select id="recipeCategory">
+      <option value="all">All Categories</option>
+      <option value="snack">Snack</option>
+      <option value="breakfast">Breakfast</option>
+      <option value="lunch">Lunch</option>
+      <option value="dinner">Dinner</option>
+      <option value="juice">Fresh Juice</option>
+    </select>
+  </div>
+  <div class="grid grid-3 mt-4" id="recipesGrid"></div>
+</section>
+
+<!-- Modal -->
+<div class="modal" id="recipeModal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="modalTitle">Recipe</h3>
+      <span class="close" id="modalClose" role="button" aria-label="Close dialog">✕</span>
+    </div>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="container footer-wrap">
+    <div class="footer-col">
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="./logo.png" alt="logo" style="height:44px">
+        <h4>GreenBite</h4>
+      </div>
+      <p class="mt-2">Healthy recipes, smart workouts and calm mind tools.</p>
+      <div class="socials">
+        <a href="https://facebook.com" aria-label="Facebook">f</a>
+        <a href="https://instagram.com" aria-label="Instagram">⌁</a>
+        <a href="https://youtube.com" aria-label="YouTube">▶</a>
+        <a href="mailto:support@greenbite.example" aria-label="Email">@</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <p><a href="./recipes.html">Recipes</a></p>
+      <p><a href="./workout.html">Workout</a></p>
+      <p><a href="./mindfulness.html">Mindfulness</a></p>
+      <p><a href="./calculator.html">Calculator</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Newsletter</h4>
+      <p>Get one healthy tip every week.</p>
+      <div class="form-row mt-2">
+        <input class="input" id="newsEmail" placeholder="Enter your email">
+        <button class="btn" id="newsBtn">Subscribe</button>
+      </div>
+      <small id="newsMsg"></small>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2025 GreenBite Wellness • Educational project</div>
+</footer>
+
+<script>
+/* =========================================================
+   RECIPES DATA (your list preserved; categories added)
+   ========================================================= */
+const RECIPES = [
+  {
+    id: "warm-lentil-salad",
+    title: "Warm Lentil Salad",
+    minutes: 9,
+    sev: 4,
+    img: "https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=1200",
+    summary: "Hearty lentils with crunchy lettuce, herbs and a lemon-yogurt dollop.",
+    serves: 2,
+    category: "lunch",
+    ingredients: [
+      "1 cup cooked green/brown lentils",
+      "1 small tomato, diced",
+      "1/4 red onion, thinly sliced",
+      "A handful of lettuce leaves",
+      "2 tbsp plain yogurt + 1 tsp lemon juice",
+      "1 tbsp olive oil, salt & pepper"
+    ],
+    steps: [
+      "Warm lentils in a pan with olive oil, salt and pepper (2–3 min).",
+      "Toss with tomato and onion. Plate with lettuce.",
+      "Stir yogurt with lemon; dollop on top and serve."
+    ]
+  },
+  {
+    id: "sardines-toast-tomato",
+    title: "Sardines on Toast & Tomato Salad",
+    minutes: 11,
+    sev: 5,
+    img: "https://i.pinimg.com/1200x/ba/d8/2a/bad82acdb06a778ea0c1658a50df8128.jpg",
+    summary: "Omega-3 rich sardines on crisp toast with a quick zesty tomato salad.",
+    serves: 1,
+    category: "lunch",
+    ingredients: [
+      "1 tin sardines in olive oil",
+      "2 slices wholegrain bread",
+      "1 large tomato, chopped",
+      "1 tsp capers (optional)",
+      "1 tsp lemon juice, salt & pepper"
+    ],
+    steps: [
+      "Toast the bread. Mix tomato, capers, lemon, salt & pepper.",
+      "Top toast with sardines; spoon salad alongside and eat warm."
+    ]
+  },
+  {
+    id: "lemon-tahini-chicken-grains",
+    title: "Lemon Tahini Chicken & Grains",
+    minutes: 13,
+    sev: 3,
+    img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1200",
+    summary: "Juicy chicken over warm grains with lemon-tahini drizzle.",
+    serves: 2,
+    category: "dinner",
+    ingredients: [
+      "250 g cooked grains (quinoa/bulgur/brown rice)",
+      "250 g cooked chicken breast, sliced",
+      "1 small cucumber + handful parsley",
+      "2 tbsp tahini + juice of 1/2 lemon",
+      "Warm water to loosen, salt & pepper"
+    ],
+    steps: [
+      "Whisk tahini with lemon, a splash of warm water, salt & pepper.",
+      "Toss grains with chopped cucumber and parsley.",
+      "Top with sliced chicken and drizzle with tahini."
+    ]
+  },
+  {
+    id: "matcha-kefir-smoothie",
+    title: "Matcha & Kefir Smoothie",
+    minutes: 5,
+    sev: 1,
+    img: "https://i.pinimg.com/1200x/61/d8/66/61d8666ab8803766aa9c63c775bf1470.jpg",
+    summary: "Tart kefir, mellow banana and matcha—fresh, probiotic pick-me-up.",
+    serves: 1,
+    category: "juice",
+    ingredients: [
+      "200 ml plain kefir",
+      "1 small banana",
+      "1/2 tsp matcha powder",
+      "Ice (optional), honey to taste"
+    ],
+    steps: [
+      "Blend everything until smooth. Taste and sweeten if needed."
+    ]
+  },
+  {
+    id: "oats-fruit-bowl",
+    title: "Oats & Fruit Bowl",
+    minutes: 7,
+    sev: 3,
+    img: "https://i.pinimg.com/736x/cf/5f/07/cf5f07051bae745d2cb3d991ae62e1a8.jpg",
+    summary: "Creamy oats topped with seasonal fruits and seeds.",
+    serves: 1,
+    category: "breakfast",
+    ingredients: [
+      "1/2 cup rolled oats",
+      "1 cup milk or almond milk",
+      "1 tsp honey",
+      "Mixed fruits (banana, berries, apple)",
+      "1 tbsp seeds or nuts"
+    ],
+    steps: [
+      "Cook oats with milk until creamy (about 5 min).",
+      "Transfer to a bowl, drizzle with honey.",
+      "Top with chopped fruits and seeds."
+    ]
+  },
+  {
+    id: "healthy-sushi-rolls",
+    title: "Healthy Veggie Sushi",
+    minutes: 20,
+    sev: 4,
+    img: "https://i.pinimg.com/736x/71/6b/3e/716b3e5eb71c2f6f6c327a37d0482607.jpg",
+    summary: "Light sushi rolls filled with avocado, cucumber, and carrots.",
+    serves: 2,
+    category: "lunch",
+    ingredients: [
+      "2 nori sheets",
+      "1 cup cooked sushi rice",
+      "1/2 avocado, sliced",
+      "1/2 cucumber, julienned",
+      "1/2 carrot, julienned"
+    ],
+    steps: [
+      "Spread rice over nori sheets, leaving edge free.",
+      "Layer avocado, cucumber, and carrot.",
+      "Roll tightly, slice into pieces, and serve."
+    ]
+  },
+  {
+    id: "wholegrain-bread",
+    title: "Homemade Wholegrain Bread",
+    minutes: 60,
+    sev: 3,
+    img: "https://i.pinimg.com/736x/ed/96/14/ed96146ff2dbec9f688dd3e128dfb69d.jpg",
+    summary: "Healthy homemade bread using wholegrain flour.",
+    serves: 4,
+    category: "breakfast",
+    ingredients: [
+      "2 cups wholegrain flour",
+      "1 tsp yeast",
+      "1 cup warm water",
+      "1 tsp salt",
+      "1 tbsp olive oil"
+    ],
+    steps: [
+      "Mix flour, yeast, salt, water, and olive oil.",
+      "Knead dough, let rise for 30 min.",
+      "Bake at 180°C for 25–30 min."
+    ]
+  },
+  {
+    id: "greek-yogurt-parfait",
+    title: "Greek Yogurt Parfait",
+    minutes: 5,
+    sev: 2,
+    img: "https://i.pinimg.com/736x/73/8a/a1/738aa1708cea273232fac36a217c2d2e.jpg",
+    summary: "Layered yogurt with granola and fresh berries.",
+    serves: 1,
+    category: "snack",
+    ingredients: [
+      "1 cup Greek yogurt",
+      "1/2 cup granola",
+      "1/2 cup fresh berries",
+      "1 tsp honey"
+    ],
+    steps: [
+      "Layer yogurt, granola, and berries in a glass.",
+      "Drizzle with honey and serve immediately."
+    ]
+  },
+  {
+    id: "quinoa-veggie-bowl",
+    title: "Quinoa Veggie Bowl",
+    minutes: 15,
+    sev: 4,
+    img: "https://i.pinimg.com/736x/68/6a/fa/686afae3df2f2d5037bfd6b58526d788.jpg",
+    summary: "Protein-rich quinoa with colorful roasted veggies.",
+    serves: 2,
+    category: "dinner",
+    ingredients: [
+      "1 cup cooked quinoa",
+      "1/2 cup roasted broccoli",
+      "1/2 cup roasted carrots",
+      "1/2 cup roasted zucchini",
+      "1 tbsp olive oil, salt & pepper"
+    ],
+    steps: [
+      "Roast vegetables at 200°C for 12 min.",
+      "Place quinoa in bowls, top with roasted veggies.",
+      "Drizzle with olive oil and season."
+    ]
+  },
+  {
+    id: "chickpea-salad",
+    title: "Mediterranean Chickpea Salad",
+    minutes: 10,
+    sev: 3,
+    img: "https://i.pinimg.com/1200x/e1/b9/c2/e1b9c29247455e6fbe93df14f5324b1f.jpg",
+    summary: "Fresh salad with chickpeas, tomatoes, cucumber, and feta.",
+    serves: 2,
+    category: "lunch",
+    ingredients: [
+      "1 can chickpeas, rinsed",
+      "1 tomato, diced",
+      "1 cucumber, diced",
+      "50 g feta cheese",
+      "1 tbsp olive oil, lemon juice, salt & pepper"
+    ],
+    steps: [
+      "Mix chickpeas, tomato, cucumber, and feta.",
+      "Dress with olive oil and lemon juice.",
+      "Toss gently and serve."
+    ]
+  },
+  {
+    id: "veggie-omelette",
+    title: "Veggie Omelette",
+    minutes: 8,
+    sev: 2,
+    img: "https://i.pinimg.com/736x/9a/9e/95/9a9e95e779fbb1037db3dcc933eb83fa.jpg",
+    summary: "Fluffy omelette packed with vegetables for a protein boost.",
+    serves: 1,
+    category: "breakfast",
+    ingredients: [
+      "2 eggs",
+      "1/4 cup spinach",
+      "1/4 cup diced peppers",
+      "1/4 cup diced onions",
+      "Salt & pepper"
+    ],
+    steps: [
+      "Whisk eggs with salt and pepper.",
+      "Pour into a heated nonstick pan.",
+      "Add vegetables, cook until set, fold, and serve."
+    ]
+  },
+  {
+    id: "grilled-salmon-veggies",
+    title: "Grilled Salmon with Veggies",
+    minutes: 18,
+    sev: 4,
+    img: "https://i.pinimg.com/736x/87/10/d9/8710d922c11083869b81e0628a275942.jpg",
+    summary: "Omega-3 rich salmon fillet with colorful grilled vegetables.",
+    serves: 2,
+    category: "dinner",
+    ingredients: [
+      "2 salmon fillets",
+      "1 zucchini, sliced",
+      "1 bell pepper, sliced",
+      "1 tbsp olive oil",
+      "Salt, pepper & lemon wedges"
+    ],
+    steps: [
+      "Season salmon with salt, pepper, and olive oil.",
+      "Grill salmon and veggies for 5–6 min each side.",
+      "Serve hot with lemon wedges."
+    ]
+  },
+  {
+    id: "chicken-buddha-bowl",
+    title: "Chicken Buddha Bowl",
+    minutes: 20,
+    sev: 4,
+    img: "https://i.pinimg.com/1200x/bb/88/3e/bb883e747243781a4df3041f17a5f564.jpg",
+    summary: "Balanced bowl of grains, lean chicken, and roasted vegetables.",
+    serves: 2,
+    category: "dinner",
+    ingredients: [
+      "1 cup brown rice or quinoa",
+      "200 g grilled chicken breast, sliced",
+      "1/2 cup roasted sweet potatoes",
+      "1/2 cup steamed broccoli",
+      "Tahini or yogurt dressing"
+    ],
+    steps: [
+      "Cook grains and place in bowls.",
+      "Top with chicken, sweet potatoes, and broccoli.",
+      "Drizzle with tahini/yogurt dressing."
+    ]
+  },
+  {
+    id: "spinach-smoothie",
+    title: "Green Spinach Smoothie",
+    minutes: 5,
+    sev: 3,
+    img: "https://i.pinimg.com/736x/84/6e/fb/846efb6f2b3731ddfbf19757530b7c5b.jpg",
+    summary: "Refreshing smoothie packed with spinach, banana, and apple.",
+    serves: 1,
+    category: "juice",
+    ingredients: [
+      "1 cup spinach",
+      "1 banana",
+      "1 apple, chopped",
+      "200 ml almond milk",
+      "1 tsp honey (optional)"
+    ],
+    steps: [
+      "Blend spinach, banana, apple, and milk.",
+      "Sweeten with honey if needed.",
+      "Serve chilled."
+    ]
+  },
+  {
+    id: "stuffed-bell-peppers",
+    title: "Stuffed Bell Peppers",
+    minutes: 25,
+    sev: 4,
+    img: "https://i.pinimg.com/1200x/d5/2e/48/d52e48a641c3548960c385da18d01c5c.jpg",
+    summary: "Bell peppers filled with quinoa, beans, and spices.",
+    serves: 3,
+    category: "dinner",
+    ingredients: [
+      "3 bell peppers, halved & seeds removed",
+      "1 cup cooked quinoa",
+      "1/2 cup black beans",
+      "1/4 cup corn",
+      "1 tsp paprika, salt & pepper"
+    ],
+    steps: [
+      "Mix quinoa, beans, corn, and seasoning.",
+      "Stuff into bell peppers.",
+      "Bake at 180°C for 15–18 min."
+    ]
+  },
+  {
+    id: "mushroom-soup",
+    title: "Creamy Mushroom Soup",
+    minutes: 15,
+    sev: 2,
+    img: "https://i.pinimg.com/1200x/61/b9/ec/61b9ec1c50a680deb1619c5e8eef4924.jpg",
+    summary: "Light yet creamy mushroom soup with herbs.",
+    serves: 2,
+    category: "dinner",
+    ingredients: [
+      "200 g mushrooms, sliced",
+      "1 onion, chopped",
+      "2 cups vegetable stock",
+      "1/2 cup milk or cream",
+      "1 tbsp olive oil"
+    ],
+    steps: [
+      "Sauté onion and mushrooms in olive oil.",
+      "Add vegetable stock and simmer 10 min.",
+      "Blend, stir in milk/cream, and season."
+    ]
+  },
+  {
+    id: "falafel-wrap",
+    title: "Falafel Wrap",
+    minutes: 12,
+    sev: 3,
+    img: "https://i.pinimg.com/736x/2b/f6/66/2bf66626ff60b84853a6d3cc95042347.jpg",
+    summary: "Protein-packed falafel wrapped with veggies and tahini sauce.",
+    serves: 2,
+    category: "lunch",
+    ingredients: [
+      "4 falafel balls (store-bought or homemade)",
+      "2 wholegrain wraps",
+      "Lettuce, tomato, cucumber slices",
+      "2 tbsp tahini sauce"
+    ],
+    steps: [
+      "Warm wraps and falafel.",
+      "Fill with lettuce, tomato, cucumber, and falafel.",
+      "Drizzle with tahini and roll up."
+    ]
+  },
+  {
+    id: "zucchini-noodles",
+    title: "Zucchini Noodles with Pesto",
+    minutes: 10,
+    sev: 2,
+    img: "https://i.pinimg.com/1200x/12/58/49/1258499cdc3f2acb38684f4e4cb779c8.jpg",
+    summary: "Low-carb noodles made from zucchini tossed in pesto.",
+    serves: 1,
+    category: "dinner",
+    ingredients: [
+      "2 medium zucchinis (spiralized)",
+      "2 tbsp pesto sauce",
+      "1 tbsp olive oil",
+      "Salt & pepper",
+      "Parmesan for garnish (optional)"
+    ],
+    steps: [
+      "Spiralize zucchinis into noodles.",
+      "Sauté briefly in olive oil (2–3 min).",
+      "Toss with pesto and serve."
+    ]
+  },
+  {
+    id: "orange-carrot-ginger-juice",
+    title: "Orange Carrot Ginger Juice",
+    minutes: 6,
+    sev: 3,
+    img: "https://i.pinimg.com/736x/36/9c/ba/369cba038fa68abe4fcbf54b213aed30.jpg",
+    summary: "Refreshing immunity-boosting juice with vitamin C and antioxidants.",
+    serves: 2,
+    category: "juice",
+    ingredients: [
+      "2 large carrots, peeled",
+      "2 oranges, peeled",
+      "1-inch piece fresh ginger",
+      "1/2 cup water"
+    ],
+    steps: [
+      "Juice carrots, oranges, and ginger together.",
+      "Add water to adjust consistency.",
+      "Serve chilled with ice."
+    ]
+  },
+  {
+    id: "green-detox-juice",
+    title: "Green Detox Juice",
+    minutes: 7,
+    sev: 4,
+    img: "https://i.pinimg.com/736x/5a/08/12/5a08123ac5b658b620107632f0e7175b.jpg",
+    summary: "Cleansing juice packed with spinach, cucumber, and apple.",
+    serves: 2,
+    category: "juice",
+    ingredients: [
+      "1 cucumber",
+      "1 green apple",
+      "1 handful spinach",
+      "1/2 lemon, juiced",
+      "1 cup water"
+    ],
+    steps: [
+      "Blend cucumber, apple, spinach, and water.",
+      "Strain if needed, add lemon juice.",
+      "Serve immediately."
+    ]
+  },
+  {
+    id: "pineapple-mint-juice",
+    title: "Pineapple Mint Juice",
+    minutes: 5,
+    sev: 3,
+    img: "https://i.pinimg.com/736x/29/89/bb/2989bb144512fddec61e3af486a3708c.jpg",
+    summary: "Sweet tropical pineapple with cooling mint.",
+    serves: 2,
+    category: "juice",
+    ingredients: [
+      "2 cups pineapple chunks",
+      "6–8 mint leaves",
+      "1/2 cup cold water",
+      "Ice cubes"
+    ],
+    steps: [
+      "Blend pineapple, mint, and water.",
+      "Strain if desired.",
+      "Serve over ice."
+    ]
+  },
+  {
+    id: "beetroot-apple-juice",
+    title: "Beetroot & Apple Juice",
+    minutes: 6,
+    sev: 3,
+    img: "https://i.pinimg.com/736x/2a/49/c5/2a49c54c11cb18086b6c39bf71cbdac0.jpg",
+    summary: "Earthy beetroot balanced with sweet apple and lemon.",
+    serves: 2,
+    category: "juice",
+    ingredients: [
+      "1 medium beetroot, peeled",
+      "1 apple",
+      "1/2 lemon",
+      "1/2 cup water"
+    ],
+    steps: [
+      "Juice beetroot and apple together.",
+      "Squeeze in lemon juice and stir.",
+      "Serve chilled."
+    ]
+  },
+  {
+    id: "watermelon-cooler",
+    title: "Watermelon Cooler",
+    minutes: 4,
+    sev: 2,
+    img: "https://i.pinimg.com/1200x/6d/06/39/6d063999de92e2bf472e5317d725b5dd.jpg",
+    summary: "Hydrating watermelon juice with lime and mint.",
+    serves: 2,
+    category: "juice",
+    ingredients: [
+      "2 cups watermelon chunks (seedless)",
+      "1/2 lime, juiced",
+      "4 mint leaves",
+      "Ice cubes"
+    ],
+    steps: [
+      "Blend watermelon until smooth.",
+      "Add lime juice and crushed mint.",
+      "Serve chilled."
+    ]
+  },
+  {
+    id: "apple-celery-juice",
+    title: "Apple Celery Juice",
+    minutes: 5,
+    sev: 3,
+    img: "https://i.pinimg.com/736x/51/7f/f5/517ff541f50d00560865b6c91f41f0f5.jpg",
+    summary: "Crisp and light juice perfect for detox mornings.",
+    serves: 1,
+    category: "juice",
+    ingredients: [
+      "2 green apples",
+      "2 celery stalks",
+      "1/2 lemon",
+      "1/2 cup cold water"
+    ],
+    steps: [
+      "Juice apples and celery together.",
+      "Stir in lemon juice and water.",
+      "Serve cold."
+    ]
+  },
+  {
+    id: "strawberry-basil-juice",
+    title: "Strawberry Basil Juice",
+    minutes: 5,
+    sev: 2,
+    img: "https://i.pinimg.com/1200x/84/61/aa/8461aa7919f8ef5c5221cc43a2fbc518.jpg",
+    summary: "Sweet strawberries with fragrant basil for a refreshing twist.",
+    serves: 2,
+    category: "juice",
+    ingredients: [
+      "1 cup fresh strawberries",
+      "6 fresh basil leaves",
+      "1 tsp honey (optional)",
+      "1/2 cup cold water"
+    ],
+    steps: [
+      "Blend strawberries, basil, and water.",
+      "Sweeten with honey if needed.",
+      "Serve over ice."
+    ]
+  },
+  {
+    id: "hummus-veggie-sticks",
+    title: "Hummus with Veggie Sticks",
+    minutes: 6,
+    sev: 2,
+    img: "https://i.pinimg.com/736x/59/c1/dd/59c1ddf7c673441458b0684be2cd86a5.jpg",
+    summary: "Creamy hummus served with crunchy carrot and cucumber sticks.",
+    serves: 2,
+    category: "snack",
+    ingredients: [
+      "1/2 cup hummus",
+      "1 carrot, cut into sticks",
+      "1 cucumber, cut into sticks",
+      "1 celery stalk"
+    ],
+    steps: [
+      "Arrange veggie sticks on a plate.",
+      "Serve with hummus for dipping."
+    ]
+  },
+  {
+    id: "greek-yogurt-berries",
+    title: "Greek Yogurt with Berries",
+    minutes: 4,
+    sev: 2,
+    img: "https://i.pinimg.com/736x/40/f6/c0/40f6c04eeae7e4305dc634dca647441a.jpg",
+    summary: "Protein-rich yogurt topped with fresh berries and a drizzle of honey.",
+    serves: 1,
+    category: "snack",
+    ingredients: [
+      "1 cup Greek yogurt",
+      "1/2 cup mixed berries",
+      "1 tsp honey",
+      "1 tbsp chopped nuts (optional)"
+    ],
+    steps: [
+      "Spoon yogurt into a bowl.",
+      "Top with berries, drizzle honey, and sprinkle nuts if desired."
+    ]
+  },
+  {
+    id: "roasted-chickpeas",
+    title: "Roasted Chickpeas",
+    minutes: 20,
+    sev: 3,
+    img: "https://i.pinimg.com/1200x/92/87/29/928729846f7f26c1996ee1e5b4d54fa9.jpg",
+    summary: "Crispy roasted chickpeas seasoned with spices for a crunchy snack.",
+    serves: 3,
+    category: "snack",
+    ingredients: [
+      "1 can chickpeas, drained",
+      "1 tbsp olive oil",
+      "1/2 tsp paprika",
+      "1/2 tsp garlic powder",
+      "Salt to taste"
+    ],
+    steps: [
+      "Toss chickpeas with olive oil and spices.",
+      "Bake at 200°C for 15–18 min until crispy."
+    ]
+  },
+  {
+    id: "apple-peanut-butter",
+    title: "Apple Slices with Peanut Butter",
+    minutes: 3,
+    sev: 1,
+    img: "https://i.pinimg.com/1200x/a6/6f/c0/a66fc0e6d41226a1f78dbebce55c9cf3.jpg",
+    summary: "Crisp apple slices paired with creamy peanut butter.",
+    serves: 1,
+    category: "snack",
+    ingredients: [
+      "1 apple, sliced",
+      "2 tbsp peanut butter"
+    ],
+    steps: [
+      "Slice the apple.",
+      "Spread or dip slices in peanut butter and enjoy."
+    ]
+  },
+  {
+    id: "trail-mix",
+    title: "Homemade Trail Mix",
+    minutes: 5,
+    sev: 2,
+    img: "https://i.pinimg.com/1200x/7d/0f/b9/7d0fb9aff955c5b1b759ea003cc125d9.jpg",
+    summary: "Energy-boosting mix of nuts, seeds, and dried fruits.",
+    serves: 2,
+    category: "snack",
+    ingredients: [
+      "1/4 cup almonds",
+      "1/4 cup walnuts",
+      "2 tbsp pumpkin seeds",
+      "2 tbsp raisins or dried cranberries",
+      "2 squares dark chocolate (optional)"
+    ],
+    steps: [
+      "Mix nuts, seeds, dried fruit, and chocolate.",
+      "Store in a jar or small snack bags."
+    ]
+  },
+  {
+    id: "cottage-cheese-toast",
+    title: "Cottage Cheese Toast",
+    minutes: 7,
+    sev: 2,
+    img: "https://i.pinimg.com/1200x/1b/ec/cb/1beccbf95af5b68e8f7b127159130bf6.jpg",
+    summary: "Wholegrain toast topped with creamy cottage cheese and fresh herbs.",
+    serves: 1,
+    category: "snack",
+    ingredients: [
+      "2 slices wholegrain bread",
+      "1/2 cup cottage cheese",
+      "Chopped chives or parsley",
+      "Pinch of black pepper"
+    ],
+    steps: [
+      "Toast bread until golden.",
+      "Spread cottage cheese and sprinkle herbs and pepper on top."
+    ]
+  },
+  {
+    id: "banana-almond-energy-bites",
+    title: "Banana Almond Energy Bites",
+    minutes: 10,
+    sev: 2,
+    img: "https://i.pinimg.com/1200x/23/5e/96/235e961e622726fe7aab559c2ac190fe.jpg",
+    summary: "Quick no-bake snack balls with oats, banana, and almonds.",
+    serves: 4,
+    category: "snack",
+    ingredients: [
+      "1 ripe banana, mashed",
+      "1 cup rolled oats",
+      "1/4 cup almond butter",
+      "2 tbsp crushed almonds"
+    ],
+    steps: [
+      "Mix mashed banana, oats, and almond butter.",
+      "Roll into small balls, coat with crushed almonds.",
+      "Chill for 20 min before serving."
+    ]
+  }
+];
+
+/* =========================================================
+   RENDERING + FILTERING
+   ========================================================= */
+const recipeSearch = document.getElementById("recipeSearch");
+const recipeCategory = document.getElementById("recipeCategory");
+const grid = document.getElementById("recipesGrid");
+
+function renderRecipes() {
+  const search = (recipeSearch?.value || "").toLowerCase();
+  const category = recipeCategory?.value || "all";
+
+  const filtered = RECIPES.filter(r => {
+    const matchesSearch = r.title.toLowerCase().includes(search);
+    const matchesCategory = category === "all" || r.category === category;
+    return matchesSearch && matchesCategory;
+  });
+
+  grid.innerHTML = filtered.map(r => `
+    <article class="recipe-card" data-id="${r.id}">
+      <div class="sev-badge">${r.sev} OF YOUR 7-A-DAY</div>
+      <button class="fav" aria-label="Save recipe">♡</button>
+      <img src="${r.img}" alt="${r.title}">
+      <div class="card-body">
+        <h3>${r.title}</h3>
+        <p class="time">⏱ ${r.minutes} mins</p>
+      </div>
+    </article>
+  `).join("");
+}
+
+recipeSearch?.addEventListener("input", renderRecipes);
+recipeCategory?.addEventListener("change", renderRecipes);
+renderRecipes();
+
+/* =========================================================
+   MODAL LOGIC
+   ========================================================= */
+const modal = document.getElementById("recipeModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalContent = document.getElementById("modalContent");
+const modalClose = document.getElementById("modalClose");
+let lastFocus = null;
+
+function openModal(recipe) {
+  lastFocus = document.activeElement;
+  modalTitle.textContent = recipe.title;
+  modalContent.innerHTML = `
+    <img src="${recipe.img}" alt="${recipe.title}" style="width:100%;max-height:320px;object-fit:cover;border-radius:12px">
+    <p class="mt-2">${recipe.summary}</p>
+    <div class="mt-3">
+      <strong>Ready in:</strong> ${recipe.minutes} mins • 
+      <strong>Serves:</strong> ${recipe.serves} • 
+      <strong>${recipe.sev} of your 7-a-day</strong>
+    </div>
+    <div class="grid mt-3" style="grid-template-columns:1fr 1fr; gap:18px">
+      <section>
+        <h4>Ingredients</h4>
+        <ul>${recipe.ingredients.map(i => `<li>${i}</li>`).join("")}</ul>
+      </section>
+      <section>
+        <h4>Steps</h4>
+        <ol>${recipe.steps.map(s => `<li>${s}</li>`).join("")}</ol>
+      </section>
+    </div>
+  `;
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+  modalClose?.focus();
+}
+
+function closeModal() {
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+  if (lastFocus) lastFocus.focus();
+}
+
+grid.addEventListener("click", (e) => {
+  const card = e.target.closest(".recipe-card");
+  if (!card) return;
+  const id = card.getAttribute("data-id");
+  const recipe = RECIPES.find(r => r.id === id);
+  if (recipe) openModal(recipe);
+});
+
+modalClose?.addEventListener("click", closeModal);
+modal.addEventListener("click", (e)=>{ if (e.target === modal) closeModal(); });
+document.addEventListener("keydown", (e)=>{ 
+  if (e.key === "Escape" && modal.classList.contains("open")) closeModal(); 
+});
+</script>
+
+<!-- keep your main site JS last -->
+<script src="./main.js"></script>
+</body>
+</html>
+

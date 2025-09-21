@@ -1,0 +1,156 @@
+[
+  {
+    "id": "overnight-oats",
+    "name": "Overnight Oats",
+    "category": "breakfast",
+    "time": "10 min prep",
+    "image": "images/food1.jpg",
+    "desc": "Creamy oats with berries & nuts.",
+    "ingredients": [
+      "1/2 cup rolled oats",
+      "1/2 cup milk",
+      "1 tbsp chia seeds",
+      "Berries",
+      "Honey"
+    ],
+    "steps": [
+      "Mix oats, milk, chia in jar",
+      "Refrigerate overnight",
+      "Top with berries & honey"
+    ],
+    "nutrition": {
+      "Calories": 320,
+      "Protein (g)": 12,
+      "Carbs (g)": 42,
+      "Fat (g)": 10
+    }
+  },
+  {
+    "id": "green-smoothie",
+    "name": "Green Detox Smoothie",
+    "category": "juice",
+    "time": "5 min",
+    "image": "https://images.pexels.com/photos/2294471/pexels-photo-2294471.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "desc": "Spinach, apple, banana & lime.",
+    "ingredients": [
+      "1 cup spinach",
+      "1 banana",
+      "1 apple",
+      "1/2 lime juice",
+      "Water"
+    ],
+    "steps": [
+      "Blend all until smooth"
+    ],
+    "nutrition": {
+      "Calories": 210,
+      "Protein (g)": 4,
+      "Carbs (g)": 48,
+      "Fat (g)": 2
+    }
+  },
+  {
+    "id": "hummus-snack",
+    "name": "Hummus & Veggie Sticks",
+    "category": "snack",
+    "time": "8 min",
+    "image": "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "desc": "Simple snack rich in fiber.",
+    "ingredients": [
+      "Hummus 3 tbsp",
+      "Carrot sticks",
+      "Cucumber sticks",
+      "Bell pepper slices"
+    ],
+    "steps": [
+      "Slice vegetables",
+      "Serve with hummus"
+    ],
+    "nutrition": {
+      "Calories": 180,
+      "Protein (g)": 6,
+      "Carbs (g)": 20,
+      "Fat (g)": 9
+    }
+  },
+  {
+    "id": "chicken-bowl",
+    "name": "Grilled Chicken Bowl",
+    "category": "lunch",
+    "time": "30 min",
+    "image": "https://images.pexels.com/photos/5938/food-chicken-meal-dinner.jpg?auto=compress&cs=tinysrgb&w=800",
+    "desc": "Lean protein with quinoa & salad.",
+    "ingredients": [
+      "Chicken breast 150g",
+      "Quinoa 1/2 cup",
+      "Mixed salad",
+      "Olive oil",
+      "Lemon"
+    ],
+    "steps": [
+      "Grill chicken",
+      "Cook quinoa",
+      "Assemble bowl with salad"
+    ],
+    "nutrition": {
+      "Calories": 520,
+      "Protein (g)": 42,
+      "Carbs (g)": 45,
+      "Fat (g)": 18
+    }
+  },
+  {
+    "id": "salmon-veggies",
+    "name": "Baked Salmon & Veggies",
+    "category": "dinner",
+    "time": "35 min",
+    "image": "https://images.pexels.com/photos/3296273/pexels-photo-3296273.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "desc": "Omega-3 rich dinner.",
+    "ingredients": [
+      "Salmon fillet 180g",
+      "Broccoli",
+      "Sweet potato",
+      "Olive oil",
+      "Garlic",
+      "Salt & pepper"
+    ],
+    "steps": [
+      "Bake salmon 12\u201315m at 200\u00b0C",
+      "Roast veggies 20\u201325m",
+      "Serve warm"
+    ],
+    "nutrition": {
+      "Calories": 610,
+      "Protein (g)": 40,
+      "Carbs (g)": 50,
+      "Fat (g)": 24
+    }
+  },
+  {
+    "id": "avocado-toast",
+    "name": "Avocado Smash Toast",
+    "category": "breakfast",
+    "time": "10 min",
+    "image": "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "desc": "Wholegrain toast topped with avocado & seeds.",
+    "ingredients": [
+      "2 slices wholegrain bread",
+      "1 ripe avocado",
+      "Lemon juice",
+      "Salt & pepper",
+      "Chili flakes",
+      "Pumpkin seeds"
+    ],
+    "steps": [
+      "Toast bread",
+      "Mash avocado with lemon & seasoning",
+      "Spread and top with seeds"
+    ],
+    "nutrition": {
+      "Calories": 380,
+      "Protein (g)": 10,
+      "Carbs (g)": 40,
+      "Fat (g)": 18
+    }
+  }
+]

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workout • GreenBite</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="icon" href="./logo.png" type="image/png">
+  <meta name="theme-color" content="#7AC143">
+</head>
+<body>
+<header class="gb-topbar">
+  <div class="container bar">
+    <div class="brand-wrap">
+      <img src="./logo.png" alt="logo" class="brand-logo">
+      <span class="brand-name">GreenBite</span>
+    </div>
+    <nav class="nav">
+      <a href="./index.html">Home</a>
+      <a href="./recipes.html">Recipes</a>
+      <a href="./calculator.html">Calculator</a>
+      <a class="active" href="./workout.html">Workout</a>
+      <a href="./mindfulness.html">Mindfulness</a>
+      <a href="./contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- PAGE TITLE -->
+  <section class="page-head">
+    <h1 class="title">Personalised Workout</h1>
+    <p class="muted"> Find what suits you: try <em>“yoga”</em>, <em>“abs workout”</em>, <em>“facial yoga”</em>, <em>“home workout”</em>…</p>
+  </section>
+
+  <!-- SEARCH + FILTERS -->
+  <section class="controls card">
+    <div class="controls-inner">
+      <div class="control-group grow">
+        <label>Search Workouts</label>
+        <div class="row">
+          <input id="workoutSearch" class="input" placeholder="e.g. yoga, abs workout, facial yoga, home workout">
+          <button id="searchBtn" class="btn">Search</button>
+        </div>
+      </div>
+      <div class="control-group">
+        <label>Level</label>
+        <select id="searchLevel" class="input">
+          <option value="beginner">Beginner</option>
+          <option value="intermediate" selected>Intermediate</option>
+          <option value="advanced">Advanced</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label>Equipment</label>
+        <select id="filterEquip" class="input">
+          <option value="none" selected>None</option>
+          <option value="dumbbells">Dumbbells</option>
+          <option value="bands">Resistance Bands</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label>Age (opt.)</label>
+        <input id="filterAge" type="number" class="input" min="10" placeholder="e.g. 45">
+      </div>
+      <div class="buttons">
+        <button class="btn" id="resetFilters">Reset</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK CHIPS (like recipe categories) -->
+  <section class="chips">
+    <div class="chip-row">
+      <button class="chip" data-chip="home">Home Workout</button>
+      <button class="chip" data-chip="yoga">Yoga</button>
+      <button class="chip" data-chip="abs">Abs</button>
+      <button class="chip" data-chip="legs">Legs</button>
+      <button class="chip" data-chip="arms">Arms</button>
+      <button class="chip" data-chip="back">Back</button>
+      <button class="chip" data-chip="facial">Facial Yoga</button>
+      <button class="chip" data-chip="wall">Wall Pilates</button>
+      <button class="chip" data-chip="chair">Chair Work</button>
+      <button class="chip" data-chip="bed">Bed Pilates</button>
+    </div>
+  </section>
+
+  <!-- IMAGE GALLERY (pre-prepared on load; filters change what shows) -->
+  <section>
+    <div id="workoutGrid" class="grid"></div>
+  </section>
+
+  <!-- PLAN MODAL -->
+  <div id="workoutDetail" class="modal" style="display:none"></div>
+
+  <!-- TIMER -->
+  <section class="card">
+    <div class="timer">
+      <div><strong>Timer:</strong> <span id="timer">00:30</span></div>
+      <div class="row">
+        <button class="btn" id="startTimer">Start</button>
+        <button class="btn ghost" id="stopTimer">Stop</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container foot">
+    <div class="col">
+      <div class="brand-wrap">
+        <img src="./logo.png" alt="logo" class="brand-logo">
+        <h4>GreenBite</h4>
+      </div>
+      <p class="muted">Healthy recipes, smart workouts and calm mind tools.</p>
+    </div>
+    <div class="col">
+      <h4>Explore</h4>
+      <p><a href="./recipes.html">Recipes</a></p>
+      <p><a href="./workout.html">Workout</a></p>
+      <p><a href="./mindfulness.html">Mindfulness</a></p>
+      <p><a href="./calculator.html">Calculator</a></p>
+    </div>
+    <div class="col">
+      <h4>Newsletter</h4>
+      <p class="muted">Get one healthy tip every week.</p>
+      <div class="row">
+        <input class="input" placeholder="Enter your email">
+        <button class="btn">Subscribe</button>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">© 2025 GreenBite Wellness • Educational project</div>
+</footer>
+
+<script src="./workout.js"></script>
+</body>
+</html>
+
+
+
+
+
