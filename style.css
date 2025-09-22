@@ -276,6 +276,54 @@ footer {
   padding: 14px 0;
   text-align: center;
   color: #9aa4b1;
+
+/* ===== Logo wrap (glassmorphism) ===== */
+.logo-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 16px;
+  border-radius:12px;
+
+  /* glass card */
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.20);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+.footer-logo{
+  height:44px; width:auto; display:block;
+  border-radius:50%;
+  /* subtle inner ring on the image */
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.15);
+}
+
+.brand-text{
+  font-family:'Poppins',sans-serif;
+  font-weight:800;
+  color:#fff;
+  letter-spacing:.3px;
+}
+
+/* Optional hover/focus glow */
+.logo-wrap:hover,
+.logo-wrap:focus-within{
+  border-color: rgba(255,255,255,0.30);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35),
+              0 0 0 2px rgba(122,193,67,0.20); /* echoes --primary */
+}
+
+/* Mobile tweak */
+@media (max-width: 640px){
+  .logo-wrap{ padding:6px 12px; }
+  .footer-logo{ height:40px; }
+}
+
+
+
+
 }
 
 /* Forms */
