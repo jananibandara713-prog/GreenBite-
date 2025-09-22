@@ -868,12 +868,23 @@ modal.addEventListener("click", (e)=>{ if (e.target === modal) closeModal(); });
 document.addEventListener("keydown", (e)=>{ 
   if (e.key === "Escape" && modal.classList.contains("open")) closeModal(); 
 });
+
+
+// in recipes.js
+async function loadRecipes(){
+  const res = await fetch('recipes.json');  // was 'data/recipes.json'
+  const data = await res.json();
+  window._recipes = data;
+  renderRecipes(data);
+}
+loadRecipes();
+
 </script>
 
-<!-- keep your main site JS last -->
+<!-- keep your main site JS last
 <script src="./main.js"></script>
 <script src="./recipes.js"></script>
-<script src="./navbar.js"></script>
+<script src="./navbar.js"></script> -->
 
 </body>
 </html>
