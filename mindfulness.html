@@ -99,10 +99,28 @@
     <div class="footer-col">
       <h4>Newsletter</h4>
       <p>Get one healthy tip every week.</p>
-      <div class="form-row mt-2">
-        <input class="input" id="newsEmail" placeholder="Enter your email">
-        <button class="btn" id="newsBtn">Subscribe</button>
-      </div>
+      <div class="footer-col">
+  <h4>Newsletter</h4>
+  <p>Get one healthy tip every week.</p>
+
+        <form class="form-row mt-2" id="newsForm" novalidate>
+          <label for="newsEmail">Email address</label>
+          <input
+            class="input"
+            id="newsEmail"
+            name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+            required
+            aria-describedby="newsMsg"
+          />
+          <button class="btn" id="newsBtn" type="submit">Subscribe</button>
+        </form>
+
+  <small id="newsMsg" aria-live="polite"></small>
+</div>
+
       <small id="newsMsg"></small>
     </div>
   </div>
